@@ -33,8 +33,9 @@ router.put('/:id', checkId, checkPayload, async (req, res, next) => {
     try {
         const { id } = req.params;
         const changes = req.body;
-        const updatedCar = await Cars.update(id, changes);
-        res.json(updatedCar)
+        const data = await Cars.update(id, changes);
+        // res.json({ oldCar: data.oldCar, updatedCar: data.updatedCar })
+        res.json({ oldCar: data.oldCar, updatedCar: data.updatedCar, difference: data.differences})
     } catch (err) {
         next(err)
     }
